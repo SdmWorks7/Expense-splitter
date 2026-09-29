@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Smart Expense Splitter</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+ 
+  <header class="container topbar">
+    <div class="brand">
+      <svg class="logo" width="38" height="38" viewBox="0 0 40 40" aria-hidden="true">
+        <g transform="rotate(-25 20 20)">
+          <path d="M18.5 3.5A16.5 16.5 0 0 0 18.5 36.5Z" fill="#1b1b1b"/>
+          <path d="M21.5 3.5A16.5 16.5 0 0 1 21.5 36.5Z" fill="#22b862"/>
+        </g>
+      </svg>
+      <span class="brand-name">Splitter</span>
+    </div>
+    <button type="button" id="reset-btn" class="round-btn" aria-label="Clear everything" title="Clear everything">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M3 12a9 9 0 1 0 3-6.7"/>
+        <path d="M3 4v5h5"/>
+      </svg>
+    </button>
+  </header>
+ 
+  <section class="container hero">
+    <div class="summary">
+      <div class="intro">
+        <h1>Who paid, who owes</h1>
+        <p>Add people, log expenses, settle up.</p>
+      </div>
+      <div class="stats">
+        <div class="stat">
+          <span>People</span>
+          <strong id="stat-people">0</strong>
+        </div>
+        <div class="stat">
+          <span>Expenses</span>
+          <strong id="stat-expenses">0</strong>
+        </div>
+        <div class="stat stat-total">
+          <span>Total spent</span>
+          <strong id="total-spent">₹0.00</strong>
+        </div>
+      </div>
+    </div>
+  </section>
+ 
+  <main class="container layout">
+ 
+    <!-- Left side: inputs -->
+    <div class="column sticky">
+ 
+      <section class="sheet">
+        <h2>Group members</h2>
+        <form id="person-form" class="row">
+          <input type="text" id="person-name" placeholder="Enter a name" maxlength="20" autocomplete="off">
+          <button type="submit" class="btn">Add</button>
+        </form>
+        <p id="person-error" class="error" role="alert"></p>
+        <ul id="people-list" class="chips"></ul>
+      </section>
+ 
+      <section class="sheet">
+        <h2 id="form-title">Add an expense</h2>
+        <form id="expense-form">
+ 
+          <label for="amount">Amount</label>
+          <div class="money">
+            <span class="cur">₹</span>
+            <input type="number" id="amount" placeholder="0.00" min="0" step="0.01" inputmode="decimal">
+            <span class="code">INR</span>
+          </div>
+          <div class="quick">
+            <button type="button" data-amount="100">₹100</button>
+            <button type="button" data-amount="500">₹500</button>
+            <button type="button" data-amount="1000">₹1000</button>
+            <button type="button" data-amount="2000">₹2000</button>
+          </div>
+ 
+          <label for="desc">What was it for?</label>
+          <input type="text" id="desc" placeholder="Dinner, cab, tickets..." maxlength="40" autocomplete="off">
+ 
+          <label for="payer">Paid by</label>
+          <select id="payer"></select>
+ 
+          <div class="label-row">
+            <label>Split between</label>
+            <button type="button" id="select-all" class="link-btn">Select all</button>
+          </div>
+          <div id="participants" class="checks"></div>
+ 
+          <p id="expense-error" class="error" role="alert"></p>
+ 
+          <button type="submit" id="submit-btn" class="btn btn-main">Add expense</button>
+          <button type="button" id="cancel-btn" class="btn btn-ghost btn-full hidden">Cancel</button>
+        </form>
+      </section>
+ 
+    </div>
+ 
+    <!-- Right side: results -->
+    <div class="column">
+ 
+      <section class="sheet">
+        <h2>Balances</h2>
+        <div id="balances"></div>
+      </section>
+ 
+      <section class="sheet">
+        <h2>Settlement plan</h2>
+        <div id="settlements"></div>
+      </section>
+ 
+      <section class="sheet">
+        <h2>Expenses</h2>
+        <div id="expense-list"></div>
+      </section>
+ 
+    </div>
+  </main>
+  <script src="script.js"></script>
+</body>
+</html>

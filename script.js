@@ -1,8 +1,7 @@
-let people = [];    // { id, name }
-let expenses = [];  // { id, desc, amount, payerId, participantIds }
+let people = [];    
+let expenses = [];  
 let editingId = null;
- 
-// ---------- Grab elements ----------
+
 const personForm = document.getElementById("person-form");
 const personInput = document.getElementById("person-name");
 const personError = document.getElementById("person-error");
@@ -27,7 +26,7 @@ const balancesEl = document.getElementById("balances");
 const settlementsEl = document.getElementById("settlements");
 const expenseListEl = document.getElementById("expense-list");
  
-// ---------- Helpers ----------
+
 function formatMoney(paise) {
   const rupees = Math.abs(paise) / 100;
   return "₹" + rupees.toLocaleString("en-IN", {
@@ -43,7 +42,7 @@ function getName(id) {
   return person ? person.name : "Unknown";
 }
  
-// gives each person one of five colours, based on their place in the group
+
 function colorClass(id) {
   const index = people.findIndex(function (p) {
     return p.id === id;
@@ -51,7 +50,7 @@ function colorClass(id) {
   return "c" + (index % 5);
 }
  
-// stops names like <b> from breaking the page
+
 function safe(text) {
   const div = document.createElement("div");
   div.textContent = text;
@@ -62,7 +61,7 @@ function save() {
   try {
     localStorage.setItem("splitterData", JSON.stringify({ people: people, expenses: expenses }));
   } catch (err) {
-    // storage can be blocked in some browsers, the app still works without it
+  
   }
 }
  
@@ -79,7 +78,7 @@ function load() {
   }
 }
  
-// ---------- People ----------
+
 personForm.addEventListener("submit", function (e) {
   e.preventDefault();
  
@@ -148,9 +147,9 @@ function renderPeople() {
   });
 }
  
-// ---------- Expense form ----------
+
 function renderFormOptions() {
-  // remember what was ticked so it doesn't reset when a new person is added
+  
   const ticked = getTickedIds();
   const alreadyShown = Array.from(participantsBox.querySelectorAll("input")).map(function (box) {
     return Number(box.value);
@@ -168,7 +167,7 @@ function renderFormOptions() {
  
     const label = document.createElement("label");
     label.className = "check";
-    // new people start ticked, existing ones keep whatever they were set to
+    
     const isTicked = !alreadyShown.includes(p.id) || ticked.includes(p.id);
     label.innerHTML = '<input type="checkbox" value="' + p.id + '"' + (isTicked ? " checked" : "") + "> " + safe(p.name);
     participantsBox.appendChild(label);
@@ -241,7 +240,7 @@ expenseForm.addEventListener("submit", function (e) {
  
 cancelBtn.addEventListener("click", resetForm);
  
-// quick amount buttons fill the amount box
+
 document.querySelectorAll(".quick button").forEach(function (btn) {
   btn.addEventListener("click", function () {
     amountInput.value = btn.dataset.amount;
@@ -249,7 +248,7 @@ document.querySelectorAll(".quick button").forEach(function (btn) {
   });
 });
  
-// top right button wipes the group and all expenses
+
 resetBtn.addEventListener("click", function () {
   if (!confirm("Clear all people and expenses?")) return;
  
@@ -304,7 +303,7 @@ function deleteExpense(id) {
   renderAll();
 }
  
-// ---------- Calculations ----------
+
 function calculateBalances() {
   const result = {};
   people.forEach(function (p) {
@@ -314,7 +313,7 @@ function calculateBalances() {
   expenses.forEach(function (exp) {
     result[exp.payerId].paid += exp.amount;
  
-    // split evenly, and hand the leftover paise out one by one
+    
     const count = exp.participantIds.length;
     const base = Math.floor(exp.amount / count);
     const leftover = exp.amount % count;
@@ -331,7 +330,7 @@ function calculateBalances() {
   return result;
 }
  
-// Matches the biggest debtor with the biggest creditor until everyone is square
+
 function makeSettlements(balances) {
   const debtors = [];
   const creditors = [];
@@ -364,7 +363,7 @@ function makeSettlements(balances) {
   return payments;
 }
  
-// ---------- Rendering results ----------
+
 function renderBalances(balances) {
   if (people.length === 0) {
     balancesEl.innerHTML = '<p class="empty">Balances will show up once you add people.</p>';
@@ -435,7 +434,7 @@ function renderExpenses() {
  
   expenseListEl.innerHTML = "";
  
-  // newest first
+
   expenses.slice().reverse().forEach(function (exp) {
     const names = exp.participantIds.map(getName).join(", ");
  
@@ -485,6 +484,6 @@ function renderAll() {
   renderExpenses();
 }
  
-// ---------- Start ----------
+
 load();
 renderAll();

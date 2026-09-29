@@ -38,7 +38,7 @@ body {
   display: none !important;
 }
  
-/* Top bar */
+
 .topbar {
   display: flex;
   justify-content: space-between;
@@ -149,7 +149,7 @@ body {
   color: #5ce08c;
 }
  
-/* Layout */
+
 .layout {
   display: grid;
   grid-template-columns: 5fr 6fr;
@@ -182,7 +182,7 @@ body {
   margin-bottom: 18px;
 }
  
-/* Forms */
+
 label {
   display: block;
   font-size: 0.85rem;
@@ -242,7 +242,7 @@ select {
   margin: 0;
 }
  
-/* Amount field with currency parts */
+
 .money {
   display: flex;
   align-items: center;
@@ -324,7 +324,7 @@ select {
   margin: 10px 0 4px;
 }
  
-/* Buttons */
+
 .btn {
   font: inherit;
   font-weight: 700;
@@ -421,14 +421,14 @@ select {
   background: var(--red-bg);
 }
  
-/* Each person gets one of five tones */
+
 .c0 { --tone: #17a355; --tone-bg: #dff5e8; }
 .c1 { --tone: #d18a00; --tone-bg: #fbefcf; }
 .c2 { --tone: #e5484d; --tone-bg: #fde4e4; }
 .c3 { --tone: #2f6fe4; --tone-bg: #e0ebfd; }
 .c4 { --tone: #7a56d6; --tone-bg: #ece6fb; }
  
-/* People chips */
+
 .chips {
   list-style: none;
   display: flex;
@@ -465,7 +465,7 @@ select {
   background: rgba(255, 255, 255, 0.7);
 }
  
-/* Checkbox rows */
+
 .checks {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -520,7 +520,7 @@ select {
   outline-offset: 2px;
 }
  
-/* Rows shared by balances, settlements and expenses */
+
 .balance-row,
 .pay-row,
 .expense-item {
@@ -588,7 +588,7 @@ select {
 .neg { color: var(--red); background: var(--red-bg); }
 .zero { color: var(--muted); background: var(--field); }
  
-/* Settlement plan */
+
 .pay-row {
   justify-content: flex-start;
 }
@@ -627,7 +627,7 @@ select {
   font-size: 0.95rem;
 }
  
-/* Expense list */
+
 .expense-item {
   align-items: flex-start;
 }
@@ -647,7 +647,7 @@ select {
   margin-top: 10px;
 }
  
-/* Tablets and phones */
+
 @media (max-width: 900px) {
   .layout {
     grid-template-columns: 1fr;
